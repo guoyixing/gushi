@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Home</title>
+    <link href="css/style.css"
+          rel="stylesheet"
+          type="text/css" media="all"/>
+</head>
+<body>
+<!---start-wrap--->
+<div class="wrap">
+    <!---start-header--->
+    <div th:include="header :: contents"></div>
+    <!---End-header--->
+    <!---start-main---->
+    <div class="main">
+        <!---start-Content---->
+        <div class="content">
+            <div class="image-slider">
+                <h3 style="font-size: 20px">推荐故事</h3>
+                <div class="container">
+                    <div id="slides">
+                        <img th:each="carousel : ${carousels}"
+                             th:src="${carousel.settingBody}"
+                             alt="">
+                        <a href="#"
+                           class="slidesjs-next slidesjs-navigation"><i
+                                class="icon-chevron-right icon-large"></i></a>
+                    </div>
+                </div>
+                <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+                <script src="js/jquery.slides.min.js"></script>
+                <script>
+                    $(function () {
+                        $('#slides').slidesjs({
+                            width: 940,
+                            height: 285,
+                            navigation: false
+                        });
+                    });
+                </script>
+            </div>
+            <div class="clear"></div>
+            <div class="Latest-news">
+                <div class="Latest-news-title">
+                    <h3 style="font-size: 30px">最新故事</h3>
+                    <h5></h5>
+                    <div class="clear"></div>
+                </div>
+                <div class="blog-articals"
+                     th:each="newStory : ${newStories}">
+                    <div class="artical">
+                        <div class="artical-heading">
+                            <h3 th:text="${newStory.name}"></h3>
+                            <h4 th:text="'上传时间： '+${#dates.format(newStory.createDate,'yyyy-MM-dd HH:mm:ss')}"></h4>
+                        </div>
+                        <div class="artical-box">
+                            <div class="artical-img">
+                                <a th:href="${newStory.id}"><img
+                                        th:src="${newStory.storyImage}"
+                                        title="imag-name"/></a>
+                            </div>
+                            <div class="artical-info">
+                                <p><span th:text="${newStory.storyProfile}"></span>
+                                    <a th:href="${newStory.id}">Read more...</a>
+                                </p>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <a class="button" href="#">显示更多</a>
+            </div>
+        </div>
+        <!---End-Content---->
+
+
+        <!---start-sidebar---->
+        <div class="side-bar">
+            <div class="sidebar-top-add">
+                <h3>Sponsersed by</h3>
+                <a href="#"><img
+                        src="images/add2.png"
+                        title="add"/></a>
+            </div>
+            <div class="presedent-img">
+                <div class="Latest-news-title side-bar-sub-heading">
+                    <h3>Form the desk of
+                        President</h3>
+                    <h5></h5>
+                    <div class="clear"></div>
+                </div>
+                <a href="#"><img
+                        src="images/prasedent.png"
+                        title="name"/></a>
+            </div>
+            <div class="sponsers-list">
+                <h3>Sponsersed by</h3>
+                <a href="#"><img
+                        src="images/spons1.png"
+                        title="sponser-name"/></a>
+                <a href="#"><img
+                        src="images/spons1.png"
+                        title="sponser-name"/></a>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <!---End-sidebar---->
+    </div>
+    <!---End-main---->
+</div>
+<!---start-footer---->
+<div class="footer">
+    <div th:include="footer :: end"></div>
+</div>
+<!---End-footer---->
+
+<!---End-wrap--->
+
+</body>
+</html>
+

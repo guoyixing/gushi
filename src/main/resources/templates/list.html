@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>single-page</title>
+		<link href="/css/style.css" rel="stylesheet" type="text/css"  media="all" />
+	</head>
+	<body>
+		<!---start-wrap--->
+		<div class="wrap">
+			<!---start-header--->
+			<div th:include="header :: contents"></div>
+			<!---End-header--->
+			<!---start-main---->
+			<div class="main">
+				<!---start-Content---->
+				<div class="content">
+					<div class="basic-elements">
+						<div class="sub-wrap">
+				<div class="common-heading">
+			 		<h1>Heading Tags</h1>
+			 	</div>
+			 	<div class="headings">
+				 		<h1> Heading 1 </h1>
+						<h2> Heading 2 </h2>
+						<h3> Heading 3 </h3>
+						<h4> Heading 4 </h4>
+						<h5> Heading 5 </h5>
+						<h6>Heading 6 </h6>
+				</div>
+			</div>
+					</div>
+					<div class="clear"> </div>
+				</div>
+				<!---End-Content---->
+				<!---start-sidebar---->
+				<div class="side-bar">
+					<div class="sidebar-top-add">
+						<h3>Sponsersed by</h3>
+						<a href="#"><img src="/images/add2.png" title="add"/></a>
+					</div>
+					<div class="presedent-img">
+							<div class="Latest-news-title side-bar-sub-heading">
+								<h3>Form the desk of President</h3>
+								<h5> </h5>
+								<div class="clear"> </div>
+							</div>
+						<a href="#"><img src="/images/prasedent.png" title="name" /></a>
+					</div>
+					<div class="sponsers-list">
+						<h3>Sponsersed by</h3>
+						<a href="#"><img src="/images/spons1.png" title="sponser-name" /></a>
+						<a href="#"><img src="/images/spons1.png" title="sponser-name" /></a>
+					</div>
+				</div>
+				<div class="clear"> </div>
+				<!---End-sidebar---->
+			</div>
+			<!---End-main---->
+			</div>
+			<!---start-footer---->
+			<div class="footer">
+				<div th:include="footer :: end"></div>
+			</div>
+			<!---End-footer---->
+
+		<!---End-wrap--->
+	
+</body>
+</html>
+
