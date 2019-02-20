@@ -1,5 +1,6 @@
 package com.gyx.gushi.controller;
 
+import com.gyx.gushi.annotation.AccessLog;
 import com.gyx.gushi.pojo.Body;
 import com.gyx.gushi.pojo.Setting;
 import com.gyx.gushi.pojo.Story;
@@ -40,6 +41,7 @@ public class StoryController {
     /**
      * 首页访问
      */
+    @AccessLog(value = "首页访问")
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView index() {
         ModelAndView mv = new ModelAndView("index");
@@ -55,6 +57,7 @@ public class StoryController {
     /**
      * 故事列表
      */
+    @AccessLog(value = "故事列表")
     @RequestMapping(value = "/list/{type}", method = RequestMethod.GET)
     public ModelAndView list(@PathVariable String type
             , @RequestParam(defaultValue = "1") int page
@@ -72,9 +75,11 @@ public class StoryController {
     /**
      * 阅读故事
      */
+    @AccessLog(value = "阅读故事")
     @RequestMapping(value = "/readStory/{id}", method = RequestMethod.GET)
     public ModelAndView readStory(@PathVariable long id) {
         ModelAndView mv = new ModelAndView("readStory");
+        storyService.updateReadNumById(id);
         Story story = storyService.getById(id);
         Body body = bodyService.getByStoryBodyId(story.getStoryBodyId());
         mv.addObject("story", story);

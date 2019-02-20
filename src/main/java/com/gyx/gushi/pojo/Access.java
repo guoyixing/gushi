@@ -1,8 +1,6 @@
 package com.gyx.gushi.pojo;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -16,10 +14,20 @@ import java.util.Date;
 public class Access implements Serializable{
 
 	@Id
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Long id;
 	private String ip;
 	private java.util.Date accessTime;
 	private String accessStory;
+
+	public Access() {
+	}
+
+	public Access(String ip, Date accessTime, String accessStory) {
+		this.ip = ip;
+		this.accessTime = accessTime;
+		this.accessStory = accessStory;
+	}
 
 	public Long getId() {
 		return id;

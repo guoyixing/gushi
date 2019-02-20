@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -81,5 +82,10 @@ public class StoryService {
 
 	public Story getById(long id) {
 		return storyDao.findById(id);
+	}
+
+	@Transactional(rollbackFor = Exception.class)
+	public int updateReadNumById(long id) {
+		return storyDao.updateReadNumById(id);
 	}
 }

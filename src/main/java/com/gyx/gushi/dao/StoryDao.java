@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import com.gyx.gushi.pojo.Story;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
@@ -22,4 +23,8 @@ public interface StoryDao extends JpaRepository<Story, String>, JpaSpecification
     Page<Story> findByStoryTypeOrderByCreateDateDesc(String type, Pageable pageable);
 
     Story findById(Long id);
+
+    @Modifying
+    @Query(value = "update story SET read_num=read_num+1 WHERE id = ?1", nativeQuery = true)
+    int updateReadNumById(long id);
 }
