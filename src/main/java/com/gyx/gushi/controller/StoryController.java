@@ -1,14 +1,20 @@
 package com.gyx.gushi.controller;
 
+import com.gyx.gushi.pojo.Body;
 import com.gyx.gushi.pojo.Setting;
 import com.gyx.gushi.pojo.Story;
+import com.gyx.gushi.pojo.Type;
+import com.gyx.gushi.service.BodyService;
 import com.gyx.gushi.service.SettingService;
 import com.gyx.gushi.service.StoryService;
+import com.gyx.gushi.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -25,6 +31,10 @@ public class StoryController {
     private SettingService settingService;
     @Autowired
     private StoryService storyService;
+    @Autowired
+    private TypeService typeService;
+    @Autowired
+    public BodyService bodyService;
 
 
     /**
@@ -46,8 +56,29 @@ public class StoryController {
      * 故事列表
      */
     @RequestMapping(value = "/list/{type}", method = RequestMethod.GET)
-    public ModelAndView list(@PathVariable String type) {
+    public ModelAndView list(@PathVariable String type
+            , @RequestParam(defaultValue = "1") int page
+            , @RequestParam(defaultValue = "10") int size) {
         ModelAndView mv = new ModelAndView("list");
+        Page<Story> stories = storyService.getStoryByTypePage(type, page, size);
+        Type storyType = typeService.getByTypeName(type);
+        mv.addObject("stories", stories.getContent());
+        mv.addObject("totalPages", stories.getTotalPages());
+        mv.addObject("page", page);
+        mv.addObject("type", storyType);
+        return mv;
+    }
+
+    /**
+     * 阅读故事
+     */
+    @RequestMapping(value = "/readStory/{id}", method = RequestMethod.GET)
+    public ModelAndView readStory(@PathVariable long id) {
+        ModelAndView mv = new ModelAndView("readStory");
+        Story story = storyService.getById(id);
+        Body body = bodyService.getByStoryBodyId(story.getStoryBodyId());
+        mv.addObject("story", story);
+        mv.addObject("body", body);
         return mv;
     }
 }

@@ -37,31 +37,6 @@ public class StoryService {
 		return storyDao.findAll();
 	}
 
-	
-	/**
-	 * 条件查询+分页
-	 * @param whereMap
-	 * @param page
-	 * @param size
-	 * @return
-	 */
-	public Page<Story> findSearch(Map whereMap, int page, int size) {
-		Specification<Story> specification = createSpecification(whereMap);
-		PageRequest pageRequest =  PageRequest.of(page-1, size);
-		return storyDao.findAll(specification, pageRequest);
-	}
-
-	
-	/**
-	 * 条件查询
-	 * @param whereMap
-	 * @return
-	 */
-	public List<Story> findSearch(Map whereMap) {
-		Specification<Story> specification = createSpecification(whereMap);
-		return storyDao.findAll(specification);
-	}
-
 	/**
 	 * 根据ID查询实体
 	 * @param id
@@ -95,43 +70,16 @@ public class StoryService {
 		storyDao.deleteById(id);
 	}
 
-	/**
-	 * 动态条件构建
-	 * @param searchMap
-	 * @return
-	 */
-	private Specification<Story> createSpecification(Map searchMap) {
-
-		return new Specification<Story>() {
-
-			@Override
-			public Predicate toPredicate(Root<Story> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-				List<Predicate> predicateList = new ArrayList<Predicate>();
-                // 
-                if (searchMap.get("name")!=null && !"".equals(searchMap.get("name"))) {
-                	predicateList.add(cb.like(root.get("name").as(String.class), "%"+(String)searchMap.get("name")+"%"));
-                }
-                // 
-                if (searchMap.get("story_type")!=null && !"".equals(searchMap.get("story_type"))) {
-                	predicateList.add(cb.like(root.get("story_type").as(String.class), "%"+(String)searchMap.get("story_type")+"%"));
-                }
-                // 
-                if (searchMap.get("story_image")!=null && !"".equals(searchMap.get("story_image"))) {
-                	predicateList.add(cb.like(root.get("story_image").as(String.class), "%"+(String)searchMap.get("story_image")+"%"));
-                }
-                // 
-                if (searchMap.get("story_profile")!=null && !"".equals(searchMap.get("story_profile"))) {
-                	predicateList.add(cb.like(root.get("story_profile").as(String.class), "%"+(String)searchMap.get("story_profile")+"%"));
-                }
-				
-				return cb.and( predicateList.toArray(new Predicate[predicateList.size()]));
-
-			}
-		};
-
-	}
-
 	public List<Story> getNewStoryTop(int top) {
 		return storyDao.findTopOrderByCreateDate(top);
+	}
+
+	public Page<Story> getStoryByTypePage(String type, int page, int size) {
+		PageRequest pageRequest =  PageRequest.of(page-1, size);
+		return storyDao.findByStoryTypeOrderByCreateDateDesc(type,pageRequest);
+	}
+
+	public Story getById(long id) {
+		return storyDao.findById(id);
 	}
 }

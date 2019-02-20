@@ -10,5 +10,5 @@ import com.gyx.gushi.pojo.Body;
  *
  */
 public interface BodyDao extends JpaRepository<Body,String>,JpaSpecificationExecutor<Body>{
-	
+	Body findById(long id);
 }

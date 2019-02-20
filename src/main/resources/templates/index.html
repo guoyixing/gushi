@@ -56,13 +56,13 @@
                         </div>
                         <div class="artical-box">
                             <div class="artical-img">
-                                <a th:href="${newStory.id}"><img
+                                <a th:href="'/readStory/'+${newStory.id}"><img
                                         th:src="${newStory.storyImage}"
                                         title="imag-name"/></a>
                             </div>
                             <div class="artical-info">
                                 <p><span th:text="${newStory.storyProfile}"></span>
-                                    <a th:href="${newStory.id}">Read more...</a>
+                                    <a th:href="'/readStory/'+${newStory.id}">阅读全部</a>
                                 </p>
                             </div>
                             <div class="clear"></div>
@@ -70,7 +70,7 @@
                     </div>
                 </div>
 
-                <a class="button" href="#">显示更多</a>
+                <a class="button" href="/list/fairyTalesStory">显示更多</a>
             </div>
         </div>
         <!---End-Content---->

@@ -119,4 +119,7 @@ public class TypeService {
 
 	}
 
+	public Type getByTypeName(String typeName) {
+		return typeDao.findByTypeName(typeName);
+	}
 }

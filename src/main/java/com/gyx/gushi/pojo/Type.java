@@ -18,6 +18,7 @@ public class Type implements Serializable {
     @Id
     private Integer id;
     private String typeName;
+    private String typeNameCn;
     private Date createDate;
 
     public Integer getId() {
@@ -42,5 +43,13 @@ public class Type implements Serializable {
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
+    }
+
+    public String getTypeNameCn() {
+        return typeNameCn;
+    }
+
+    public void setTypeNameCn(String typeNameCn) {
+        this.typeNameCn = typeNameCn;
     }
 }

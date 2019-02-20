@@ -118,4 +118,7 @@ public class BodyService {
 
 	}
 
+	public Body getByStoryBodyId(Long storyBodyId) {
+		return bodyDao.findById(storyBodyId);
+	}
 }

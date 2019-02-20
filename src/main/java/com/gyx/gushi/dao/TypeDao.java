@@ -10,5 +10,5 @@ import com.gyx.gushi.pojo.Type;
  *
  */
 public interface TypeDao extends JpaRepository<Type,String>,JpaSpecificationExecutor<Type>{
-	
+	Type findByTypeName(String typeName);
 }
